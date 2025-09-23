@@ -1,0 +1,28 @@
+stages:
+  prepare:
+    cmd: python -m src.pipeline.prepare
+    deps:
+      - src/pipeline/prepare.py
+      - params.yaml
+    outs:
+      - data/processed
+  train:
+    cmd: python -m src.pipeline.train
+    deps:
+      - src/pipeline/train.py
+      - data/processed
+      - params.yaml
+    outs:
+      - models/model.pkl
+    metrics:
+      - models/metrics.json:
+          cache: false
+  evaluate:
+    cmd: python -m src.pipeline.evaluate
+    deps:
+      - src/pipeline/evaluate.py
+      - models/model.pkl
+      - params.yaml
+    metrics:
+      - models/metrics.json:
+          cache: false

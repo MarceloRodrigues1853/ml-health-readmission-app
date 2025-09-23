@@ -1,0 +1,55 @@
+openapi: 3.0.3
+info:
+  title: Readmission Risk API
+  version: 1.0.0
+paths:
+  /predict:
+    post:
+      summary: Prediz readmissão em 30 dias
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatientFeatures'
+      parameters:
+        - in: query
+          name: threshold
+          schema:
+            type: number
+            default: 0.5
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PredictionResponse'
+components:
+  schemas:
+    PatientFeatures:
+      type: object
+      properties:
+        age: { type: integer }
+        sex: { type: integer, description: "0=f, 1=m" }
+        length_of_stay: { type: number }
+        comorbidities: { type: integer }
+        prior_readmissions: { type: integer }
+        medication_count: { type: integer }
+        lab_score: { type: number }
+        discharge_type: { type: integer }
+      required:
+        - age
+        - sex
+        - length_of_stay
+        - comorbidities
+        - prior_readmissions
+        - medication_count
+        - lab_score
+        - discharge_type
+    PredictionResponse:
+      type: object
+      properties:
+        readmission_proba: { type: number }
+        threshold: { type: number }
+        readmitted_30d: { type: integer }

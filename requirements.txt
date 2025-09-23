@@ -1,0 +1,11 @@
+dvc==3.55.2
+fastapi==0.115.5
+uvicorn==0.30.6
+pydantic==2.9.2
+pandas==2.2.2
+numpy==1.26.4
+scikit-learn==1.5.1
+joblib==1.4.2
+pytest==8.3.2
+flake8==7.1.0
+python-dotenv==1.0.1
