@@ -1,7 +1,6 @@
 .venv/
 __pycache__/
 *.pyc
-.dvc/
 .dvcignore
 data/raw/
 data/processed/
