@@ -1,4 +1,4 @@
-name: CI - ML Health Readmission
+name: CI - ML Health Readmissao
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up Python
+      - name: Setup Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
@@ -26,18 +26,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Install deps
+      - name: Install dependencies
         env:
           PIP_DISABLE_PIP_VERSION_CHECK: "1"
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Lint (não falha o build)
+      - name: Lint (não falha na compilação)
         run: |
-          flake8 src tests || true
+          flake8 src || true
 
-      - name: Validate DVC pipeline (simulação)
+      - name: Validate DVC pipeline (dry run)
         env:
           DVC_NO_ANALYTICS: "1"
         run: |
@@ -45,5 +45,5 @@ jobs:
           dvc doctor
           dvc repro --dry
 
-      - name: Run unit tests
+      - name: Executar testes unitários
         run: pytest -q
