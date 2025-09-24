@@ -87,4 +87,3 @@ docker run -p 8000:8000 readmission-api
 ## 🔗 GitHub Pages (link público da estratégia)
 - Coloque docs extras em `docs/`.
 - Ative **Settings → Pages** (branch main, pasta `/docs`).
-- Use a URL pública na sua tarefa.
